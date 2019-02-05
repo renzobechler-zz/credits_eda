@@ -101,19 +101,3 @@ def treat_outliers(data_in, column_names=[], value='mean', method='whiskers'):
 
     return data
         
-
-
-def plot_hist(data_to_plot):
-    '''Plot an histogram of each one of the columns of the dataframe (or series) passed in data_to_plot.
-    '''
-    #Remove borrower_id and serious_dlqin2yrs columns from plotting list
-
-    ax = data_to_plot.hist(bins=20, color='steelblue', 
-           edgecolor='black', linewidth=1.0, figsize=(30,30),
-           xlabelsize=20, ylabelsize=20, grid=False);
-
-    [x.title.set_size(20) for x in ax.ravel()];
-    [x.tick_params('x', labelrotation=30.0) for x in ax.ravel()];
-    plt.show()
-    
-    
