@@ -101,3 +101,4 @@ def treat_outliers(data_in, column_names=[], value='mean', method='whiskers'):
 
     return data
         
+    
