@@ -70,6 +70,7 @@ def treat_outliers(data_in, column_names=[], value='mean', method='whiskers'):
                 * default value: "all columns"
             - value: Value to replace outlier values.
                 * mean: Apply mean value of the column to the outliers (default value)
+                * median: Apply median value of the column to the outliers
                 * remove: Remove outliers from column (applying NaN)
                 * min_max_value: Replace outlier values with the maximum (or minimum) value within method's limits
             - method: method to treat outliers
@@ -103,8 +104,11 @@ def treat_outliers(data_in, column_names=[], value='mean', method='whiskers'):
             col_data.loc[col_data>upper_limit] = upper_limit
         elif value == 'remove':
             col_data.loc[(col_data<lower_limit) | (col_data>upper_limit)] = np.nan
+        elif value == 'median':
+            median_value = col_data.loc[(col_data>=lower_limit) & (col_data<=upper_limit)].median()
+            col_data.loc[(col_data<lower_limit) | (col_data>upper_limit)] = median_value     
         else: 
-            mean_value = col_data.loc[(col_data>=lower_limit) & (col_data<=upper_limit)].mean()
+            mean_value = col_data.loc[(col_data>=lower_limit) & (col_data<=upper_limit)].mean()   
             col_data.loc[(col_data<lower_limit) | (col_data>upper_limit)] = mean_value #Default value's choice 
     
         data[col_name] = col_data
