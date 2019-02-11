@@ -1,6 +1,17 @@
 import numpy as np
 import pandas as pd
 
+def get_ratio(row, column_1, column_2):
+    '''Computes the ratio between column_1 and columns_2
+        args:
+            - column_1: value of the column for the numerator
+            - column_2: value fo the column for the denominator
+        returns:
+            - ratio (rounded up to two decimals)
+    '''
+    ratio = round(row[column_1]/ row[column_2], 2)
+    return ratio
+
 
 def log_normalize_dist(data, column_names=[]):
     '''
